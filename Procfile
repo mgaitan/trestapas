@@ -1,1 +1,0 @@
-web: gunicorn --pythonpath="$PWD/trestapas" config.wsgi:application
