@@ -1,0 +1,144 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tres Tapas</title>
+
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+	<!-- Load css for c3 basic styles -->
+	<link rel="stylesheet" type="text/css" href="{% static 'lib/c3/c3.css' %}">
+
+	<!-- Load d3.js and c3.js -->
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script src="{% static 'lib/c3/c3.js' %}" charset="utf-8"></script>
+
+	<!-- Load d3-cloud.js plugin -->
+	<script src="{% static 'lib/d3-cloud/d3.layout.cloud.js' %}"></script>
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-static-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Tres Tapas</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="main-navbar">
+				<div clas="row">
+					<div class="col-md-3">
+						<ul class="nav navbar-nav">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Diarios <b class="caret"></b></a>
+								<ul class="dropdown-menu source-dropdown">
+										<li class="checkbox">
+											<label>
+												<input type="checkbox"> Clarin
+											</label>
+										</li>
+										<li class="checkbox">
+											<label>
+												<input type="checkbox"> La Nacion
+											</label>
+										</li>
+										<li class="checkbox">
+											<label>
+												<input type="checkbox"> Ambito Financiero
+											</label>
+										</li>
+								</ul>
+							</li>
+							<li data-toggle="modal" data-target="#main-modal"><a>Modo</a></li>
+						</ul>
+					</div>
+					<div class="col-md-4 ">
+						<form class="navbar-form" role="search"  style="text-align: center;">
+							<div class="input-group" style="width:100%;">
+								<span class="input-group-addon glyphicon glyphicon-search glypicon-navbar"></span>
+								<input type="text" class="form-control" placeholder="Search">
+							</div>
+						</form>
+					</div>
+					<div class="col-md-4">
+					</div>
+				</div>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+
+	<div class="container-fluid" style="height:85%">
+		<div class="row header-container">
+			<div class="col-md-12">
+				<div class="page-header">
+					<h1>Inflacion <small>Clarin, La Nacion, Ambito Financiero</small></h1>
+				</div>
+			</div>
+		</div>
+		<div class="row main-container">
+			<div class="col-md-8">
+				<div class="panel panel-default chart-panel">
+  				<div class="panel-body ">
+							<div id="chart"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<ul class="nav nav-tabs">
+					<li class="active pull-right wordcloud-tab"><a style="margin-right:0px;">Tendencias</a></li>
+				</ul>
+				<div class="panel panel-default wordcloud-panel">
+  				<div class="panel-body">
+							<div id="wordcloud"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="modal">
+		<div class="modal fade" id="main-modal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="mode-selector">
+								<a class="btn mode-option">un tema</a>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="mode-selector">
+								<a class="btn mode-option">multitema</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	</div>
+
+	<script src="{% static 'js/line.js' %}" charset="utf-8"></script>
+	<script src="{% static 'js/wordcloud.js' %}" charset="utf-8"></script>
+</body>
+</html>

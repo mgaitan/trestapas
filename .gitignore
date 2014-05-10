@@ -6,7 +6,7 @@ local_settings.py
 .nose*
 .wiki
 .noseids
-*.db
+*.sqlite3
 *.swp
 
 *.py[cod]
