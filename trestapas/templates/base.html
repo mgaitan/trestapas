@@ -1,87 +1,144 @@
-{% load staticfiles i18n %}<!DOCTYPE html>
-<html lang="en" ng-app>
-  <head>
-    <meta charset="utf-8">
-    <title>{% block title %}trestapas{% endblock title %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% load staticfiles %}
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tres Tapas</title>
 
-    {% block css %}
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 
-    <!-- Your stuff: Third-party css libraries go here -->
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 
-    <!-- This file store project specific CSS -->
-    <link href="{% static 'css/project.css' %}" rel="stylesheet">
-    {% endblock %}
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-    {% block angular %}
-      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular.min.js"></script>
-    {% endblock %}
+	<!-- Load css for c3 basic styles -->
+	<link rel="stylesheet" type="text/css" href="{% static 'lib/c3/c3.css' %}">
 
-  </head>
+	<!-- Load d3.js and c3.js -->
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script src="{% static 'lib/c3/c3.js' %}" charset="utf-8"></script>
 
-  <body>
+	<!-- Load d3-cloud.js plugin -->
+	<script src="{% static 'lib/d3-cloud/d3.layout.cloud.js' %}"></script>
 
-    <div class="header navbar">
-      <div class="container">
-        <a class="navbar-brand" href="/">trestapas</a>
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="{% url 'home' %}">Home</a></li>
-          <li><a href="{% url 'about' %}">About</a></li>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
-          {% if request.user.is_authenticated %}
-            <li><a href="{% url 'users:detail' request.user.username  %}">{% trans "My Profile" %}</a></li>
-            <li><a href="{% url 'account_logout' %}">{% trans "Logout" %}</a></li>
-          {% else %}
-            <li><a href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
-            <li><a href="{% url 'account_login' %}">{% trans "Log In" %}</a></li>
-          {% endif %}
-        </ul>
-      </div>
-    </div>
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-static-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Tres Tapas</a>
+			</div>
 
-    <div class="container">
-        
-      {% if messages %}
-          {% for message in messages %}
-              <div class="alert {% if message.tags %}alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
-          {% endfor %}
-      {% endif %}
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="main-navbar">
+				<div clas="row">
+					<div class="col-md-3">
+						<ul class="nav navbar-nav">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Diarios <b class="caret"></b></a>
+								<ul class="dropdown-menu source-dropdown">
+										<li class="checkbox">
+											<label>
+												<input type="checkbox"> Clarin
+											</label>
+										</li>
+										<li class="checkbox">
+											<label>
+												<input type="checkbox"> La Nacion
+											</label>
+										</li>
+										<li class="checkbox">
+											<label>
+												<input type="checkbox"> Ambito Financiero
+											</label>
+										</li>
+								</ul>
+							</li>
+							<li data-toggle="modal" data-target="#main-modal"><a>Modo</a></li>
+						</ul>
+					</div>
+					<div class="col-md-4 ">
+						<form class="navbar-form" role="search"  style="text-align: center;">
+							<div class="input-group" style="width:100%;">
+								<span class="input-group-addon glyphicon glyphicon-search glypicon-navbar"></span>
+								<input type="text" class="form-control" placeholder="Search">
+							</div>
+						</form>
+					</div>
+					<div class="col-md-4">
+					</div>
+				</div>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
 
-      {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
+	<div class="container-fluid" style="height:85%">
+		<div class="row header-container">
+			<div class="col-md-12">
+				<div class="page-header">
+					<h1>Inflacion <small>Clarin, La Nacion, Ambito Financiero</small></h1>
+				</div>
+			</div>
+		</div>
+		<div class="row main-container">
+			<div class="col-md-8">
+				<div class="panel panel-default chart-panel">
+  				<div class="panel-body ">
+							<div id="chart"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<ul class="nav nav-tabs">
+					<li class="active pull-right wordcloud-tab"><a style="margin-right:0px;">Tendencias</a></li>
+				</ul>
+				<div class="panel panel-default wordcloud-panel">
+  				<div class="panel-body">
+							<div id="wordcloud"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    </div> <!-- /container -->
-    
-    {% block modal %}{% endblock modal %}
+	<div id="modal">
+		<div class="modal fade" id="main-modal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="mode-selector">
+								<a class="btn mode-option">un tema</a>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="mode-selector">
+								<a class="btn mode-option">multitema</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	</div>
 
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    {% block javascript %}
-      <!-- Latest JQuery -->
-      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-      <!-- Latest compiled and minified JavaScript -->
-      <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-
-      <!-- Your stuff: Third-party javascript libraries go here -->
-
-      <!-- place project specific Javascript in this file -->
-      <script src="{% static 'js/project.js' %}"></script>
-    {% endblock javascript %}
-  </body>
+	<script src="{% static 'js/line.js' %}" charset="utf-8"></script>
+	<script src="{% static 'js/wordcloud.js' %}" charset="utf-8"></script>
+</body>
 </html>
- 
