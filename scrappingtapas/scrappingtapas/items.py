@@ -5,7 +5,13 @@
 
 from scrapy.item import Item, Field
 
-class ScrappingtapasItem(Item):
-    # define the fields for your item here like:
-    # name = Field()
-    pass
+class ArticuloItem(Item):
+    url_articulo = Field()
+    antetitulo = Field()
+    fecha = Field()
+    texto = Field()
+    autor = Field()
+    bajada = Field()
+    titulo = Field()
+    url_imagen = Field()
+    orden = Field()
