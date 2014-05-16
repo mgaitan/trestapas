@@ -1,8 +1,26 @@
 trestapas
 ==============================
 
-A platform to analyze historical newspaper discourses
+Tres Tapas es una plataforma web para analizar y comparar el seguimiento de diferentes temas
+en los titulares de tapa de los principales diarios argentinos.
 
+En una primera versión, permite:
+
+1. Elegir varios diarios, comparar un tema: 
+Visualizar menciones de palabras clave (e.g.: inflación, Tinelli) en una selección de distintos medios
+que haga el usuario.
+
+2. Elegir temas, comparar ocurrencias en un mismo diario:
+Útil para analizar correlaciones entre distintos temas, o el impacto de unos en otros.
+
+Los titulares de tapa se extraen de los portales de los diarios, haciendo especial énfasis en recuperar 
+lo más fielmente posible la * tapa impresa * de los mismos. Este foco en la tapa impresa tiene que ver con
+que la misma es una síntesis fuerte de la línea editorial de cada medio, y la que más llegada tiene, pues llega
+a gente que no consulta la edición online, e incluso a quienes ni siquiera compran el diario y pueden ver la tapa
+en los kioscos.
+
+Resultaría interesante a futuro hacer también análisis similares sobre todo el contenido de cada edición,
+pero es una idea diferente.
 
 LICENSE: BSD
 
